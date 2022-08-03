@@ -1,0 +1,5 @@
+#Welcome function
+def welcome_user():
+    print("Welcome to Family Feeders! \U0001F60A")
+
+welcome_user()
