@@ -1,4 +1,4 @@
-#Welcome function
+#Welcome function, This function prints a welcome statement for the user and then prints a smiley face emoji
 def welcome_user():
     print("Welcome to Family Feeders! \U0001F60A")
 
