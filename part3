@@ -1,0 +1,17 @@
+import random
+
+def random_fact():
+    facts = ["16.6% of the World's Population is undernourished",
+             "1 Billion people are living in extreme poverty",
+             "More than 1 billion people live on less than $1.25 a day",
+             "1/8 of Asia lives in constant hunger",
+             "Hunger is the cause of 45% of all children's deaths",
+             "More than 99 Million children under the age of five are still undernourished and underweight",
+             "Almost 1/4 of India is undernourished",
+             "Rising Global food costs will cause 1.5 million more children to be undernourished"]
+
+    random_facts = random.choices(facts, k=1)
+
+
+    print(random_facts)
+random_fact()
