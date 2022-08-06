@@ -1,0 +1,21 @@
+#import part2
+restart1 = True
+
+def restart_code():
+    global restart1
+    i=1
+    while restart1 == True:
+
+        use_again = input("Do you wish to use this program again Press Y or N").strip().lower()
+        if use_again == 'y':
+            #menu()
+
+            restart1 = True
+        elif use_again == 'n':
+            print("Thanks")
+            restart1 = False
+        else:
+            print('Please enter one of the options.')
+    restart1 = True
+
+restart_code()
