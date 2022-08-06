@@ -1,0 +1,172 @@
+# Import Libraries
+import time
+import random
+import pyfiglet
+
+
+# Welcome function, Prints out welcome statement using the pyfiglet library in ASCII text, then runs the menu def after 1 second
+def welcome_user():
+    ascii_banner = pyfiglet.figlet_format("Hello!!")
+    print(ascii_banner)
+    time.sleep(1)
+    print("Welcome to Family Feeders")
+    menu()
+
+# This function is made with a list of random facts about world hunger, then using the random library, it selects a random fact in the list and prints it
+def random_fact():
+    facts = ["16.6% of the World's Population is undernourished",
+             "1 Billion people are living in extreme poverty",
+             "More than 1 billion people live on less than $1.25 a day",
+             "1/8 of Asia lives in constant hunger",
+             "Hunger is the cause of 45% of all children's deaths",
+             "More than 99 Million children under the age of five are still undernourished and underweight",
+             "Almost 1/4 of India is undernourished",
+             "Rising Global food costs will cause 1.5 million more children to be undernourished"]
+    random_facts = random.choices(facts, k=1)
+    print(random_facts)
+    time.sleep(2)
+    print("")
+    menu()
+
+# This is the find_local_bins function, it will help the user find food donation bins in their area with an inputted variable
+# This will ask the user to enter a number that relates to the area they live in, this will then use the text files to read out the food bins on the text file
+# This function has 5 text files, each one relating to the different location
+find_local_bins = True
+def find_local_bins():
+    while True:
+        try:
+            ascii_banner = pyfiglet.figlet_format("Foodbin Finder")
+            print(ascii_banner)
+            count = 0
+            auckland_regions_dict = {1 : 2,
+                                 2 : 1,
+                                 3 : 3,
+                                 4 : 2,
+                                 5 : 3}
+            print("Welcome to the local donation bin finder")
+            print("Please enter the number that corresponds with the region you live in:")
+            your_suburb  = int(input("""Whats your region in auckland?
+1. Auckland CBD
+2. North Shore
+3. Central Auckland
+4. South Auckland
+5. West Auckland
+6. Return to main menu
+"""))
+            for k, v in auckland_regions_dict.items():
+                if k == your_suburb:
+                    num = v
+            if your_suburb == 1:
+                print("There are {} food bin locations in Auckland CBD".format(num))
+                time.sleep(1)
+                sub = open("cbd_foodbins.txt", "r")
+                for i in sub:
+                        for word in i.split('#'):
+                            print(word, end="")
+                            menu()
+            elif your_suburb == 2:
+                print("There is {} food bin locations in North Shore".format(num))
+                time.sleep(1)
+                sub = open("northshore_foodbins.txt", "r")
+                for i in sub:
+                    for word in i.split('#'):
+                        print(word, end="")
+                        menu()
+            elif your_suburb == 3:
+                print("There are {} food bin locations in Central Auckland ".format(num))
+                time.sleep(1)
+                sub = open("central_foodbins.txt", "r")
+                for i in sub:
+                    for word in i.split('#'):
+                        print(word, end="")
+                        menu()
+            elif your_suburb == 4:
+                print("There are {} food bin locations in South Auckland".format(num))
+                time.sleep(1)
+                sub = open("south_foodbins.txt", "r")
+                for i in sub:
+                    for word in i.split('#'):
+                        print(word, end="")
+                        menu()
+            elif your_suburb == 5:
+                print("There are {} food bin locations in West Auckland".format(num))
+                time.sleep(1)
+                sub = open("west_foodbins.txt", "r")
+                for i in sub:
+                    for word in i.split('#'):
+                        print(word, end="")
+                        menu()
+            elif your_suburb == 6:
+                menu()
+            else:
+                print("Please enter one of the options")
+            time.sleep(1)
+            print("")
+            find_local_bins = True
+        except ValueError:
+                print("Please enter one of the options")
+                time.sleep(1)
+                print("")
+                find_local_bins = True
+    menu()
+    find_local_bins = False
+
+
+# sets the menu to true in a loop so the menu function can re-run if one of the options isn't selected
+menu=True
+# The menu function, it asks the user whether they'd like to learn about world hunger or find local donation bins, uses an integer input to ask the user for their option
+# This then takes the users input and checks it against the 'options' input to check if the user has inputted a valid variable
+def menu():
+    while True:
+        try:
+         ascii_banner = pyfiglet.figlet_format("Menu")
+         print(ascii_banner)
+         options = int(input("""Would you like to...            
+1. Find local food donation bins
+or
+2. Get random facts about world hunger
+or 
+3. Quit the program
+"""))
+         if options == 1:
+            find_local_bins()
+            break
+         elif options == 2:
+            random_fact()
+            break
+         elif options == 3:
+            menu = False
+            break
+        except ValueError:
+            print("Please enter one of the options")
+            time.sleep(1)
+        else:
+            print("Please enter one of the options")
+            time.sleep(1)
+
+
+restart_program = True
+# This function will ask the user if they want to rerun the code, if they type 'y', it runs the menu() function, if not, it
+# prints a farewell message and finished the code
+def restart_code():
+    global restart_program
+    i=1
+    while restart_program == True:
+
+        use_again = input("""
+Do you wish to use this program again? Press Y or N""").strip().lower()
+        if use_again == 'y':
+            menu()
+            restart_program = True
+        elif use_again == 'n':
+            print("Thanks for using Family Feeders \U0001F60A")
+            restart_program = False
+        else:
+            print('Please enter one of the options.')
+    restart_program = True
+
+# <---------------------------MAIN------------------------->
+# Runs the welcome_user def function
+welcome_user()
+# Runs the restart_code def function
+restart_code()
