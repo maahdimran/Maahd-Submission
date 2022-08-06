@@ -1,0 +1,28 @@
+#sets the menu to true in a loop so the menu function can re-run if one of the options isn't selected
+menu=True
+
+#The menu function, it asks the user whether they'd like to learn about world hunger or find local donation bins
+def menu():
+    while True:
+        try:
+         options = int(input("""Would you like to...
+1. find local food donation bins
+or
+2. get random facts about world hunger
+or 
+3. Quit the program
+"""))
+         if options == 1:
+            find_local_bins()
+            break
+         elif options == 2:
+
+            random_facts()
+            break
+         elif options == 3:
+             break
+        except ValueError:
+            print("Please enter one of the options")
+            time.sleep(2)
+
+menu()
