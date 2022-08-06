@@ -1,0 +1,36 @@
+def find_local_bins():
+    count = 0
+    auckland_regions_dict = {"Auckland CBD": 2,
+                             "Auckland Central": 3,
+                             "North Shore": 1,
+                             "South Auckland": 2,
+                             "West Auckland": 3}
+
+    print("Welcome to the local donation bin finder")
+    print("Select the number that matches the region you live in:")
+
+    #open file region to display list of regions
+
+
+
+    your_suburb  = input("Whats your region in auckland?")
+    for k, v in auckland_regions_dict.items():
+        if k == your_suburb:
+            num = v
+    if your_suburb == "Auckland CBD":
+        print("There are {} food bin locations in {}".format(num, your_suburb))
+        sub = open("cbd_foodbins.txt", "r")
+        # print(sub.readlines())
+        for i in sub:
+                for word in i.split('#'):
+                    print(word, end="")
+
+    elif your_suburb == "North Shore":
+            sub = open("northshore_foodbins.txt", "r")
+            # print(sub.readlines())
+            for i in sub:
+                for word in i.split('#'):
+                    print(word, end="")
+
+
+find_local_bins()
