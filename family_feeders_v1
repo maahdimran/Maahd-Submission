@@ -1,0 +1,125 @@
+import time         #imports time to do time.sleep
+import random     #imports random to do random
+
+
+#Welcome function
+def welcome_user():         #welcome user def function
+    print("Welcome to Family Feeders! \U0001F60A")      #prints welcome statement with a smiley face emoji
+    menu()      #runs the menu def function
+
+
+#sets the menu to true in a loop so the menu function can re-run if one of the options isn't selected
+menu=True
+
+#The menu function, it asks the user whether they'd like to learn about world hunger or find local donation bins
+def menu():
+    while True:                     #while loop
+        try:
+         options = int(input("""Would you like to...            
+1. find local food donation bins
+or
+2. get random facts about world hunger
+or 
+3. Quit the program
+"""))           #prints the options in an 'input' variable to let the user select one of the options
+         if options == 1:           #if the user types '1'
+            find_local_bins()         #runs the find_local_bins def function
+            break               #breaks loop
+         elif options == 2:             #or if user types '2'
+
+            random_fact()               #runs random_fact def function
+            break                   #breaks the loop
+         elif options == 3:         #if the user types '3'
+             break          #break the code (exiting)
+        except ValueError:          #if there is a value_error
+            print("Please enter one of the options")            #prints statement
+            time.sleep(2)           #time sleep for 2 seconds to rerun the while loop
+
+
+
+#random fact function
+def random_fact():
+    facts = ["16.6% of the World's Population is undernourished",       #list of all the random facts
+             "1 Billion people are living in extreme poverty",
+             "More than 1 billion people live on less than $1.25 a day",
+             "1/8 of Asia lives in constant hunger",
+             "Hunger is the cause of 45% of all children's deaths",
+             "More than 99 Million children under the age of five are still undernourished and underweight",
+             "Almost 1/4 of India is undernourished",
+             "Rising Global food costs will cause 1.5 million more children to be undernourished"]
+
+    random_facts = random.choices(facts, k=1)           #chooses a random line in the list
+
+
+    print(random_facts)     #prints the random fact
+    #find_local_bins def function
+def find_local_bins():
+    count = 0
+    #Auckland regions dictionary that lists how many values are in the files
+    auckland_regions_dict = {"Auckland CBD": 2,
+                             "Auckland Central": 3,
+                             "North Shore": 1,
+                             "South Auckland": 2,
+                             "West Auckland": 3}
+
+    print("Welcome to the local donation bin finder")               #welcomes usrr to function
+
+
+
+
+
+
+    your_suburb  = input("""Whats your region in auckland?
+                         -North Shore
+                         -Auckland CBD
+                         -""").strip().lower()      #Asks the user what their region in Auckland
+    for k, v in auckland_regions_dict.items():
+        if k == your_suburb:
+            num = v
+    if your_suburb == "Auckland CBD":       #if suburb is "auckland cbd"
+        print("There are {} food bin locations in {}".format(num, your_suburb))
+        sub = open("cbd_foodbins.txt", "r")     #opens cbd_foodbins file
+        # print(sub.readlines())
+        for i in sub:
+                for word in i.split('#'): #uses the '#' in the file as a new line
+                    print(word, end="")
+
+    elif your_suburb == "North Shore":          #if suburb is "north shore"
+            sub = open("northshore_foodbins.txt", "r")      #open the file
+            # print(sub.readlines())
+            for i in sub:
+                for word in i.split('#'):               #uses the '#' in the file as a new line
+                    print(word, end="")
+
+    elif your_suburb == "North Shore":  # if suburb is "north shore"
+        sub = open("northshore_foodbins.txt", "r")  # open the file
+        # print(sub.readlines())
+        for i in sub:
+            for word in i.split('#'):  # uses the '#' in the file as a new line
+                print(word, end="")
+
+
+restart_program = True       #sets restart_program to true to create a loop
+
+def restart_code():             #restart_code def
+    global restart_program
+    i=1
+    while restart_program == True:
+
+        use_again = input("Do you wish to use this program again Press Y or N").strip().lower()             #Asks the user to use the program again
+        if use_again == 'y':            #if user inputs 'y'
+            menu()              #runs the menu code again
+
+            restart_program = True              #reruns code
+        elif use_again == 'n':                          #if user is 'no'
+            print("Thanks")                         #farewell message
+            restart_program = False                 #Sets restart_program to false to break look
+        else:
+            print('Please enter one of the options.')           #Asks the user to select one of the options
+    restart_program = True                                 #Sets restart_program to true
+
+
+ # Runs the welcome_user def function
+welcome_user()
+#Runs the restart_code def function
+restart_code()
